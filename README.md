@@ -1,6 +1,20 @@
-# Projeto-de-Bloco
+# Projeto de Bloco
 Atividades do projeto de bloco Desenvolvimento Java
 
-Primeira iteração:
+## Primeira iteração:
 
 Construção de um serviço que simula um acesso a BD para autenticação de usuários e um esqueleto do sistema, em uma aplicação WAR, que acessa os serviços de autenticação.
+
+Implementação dos casos de uso:
+
+- [x] Cadastramento de usuários
+- [x] Acesso ao sistema
+
+## Segunda iteração:
+
+Implementação de um banco de dados para persistência das informações inseridas no sistema. Criação de nova API para acessar às informações das empresas cadastradas no sistema.
+
+Implementação dos seguintes casos de uso:
+
+- [x] Pesquisa de vagas
+- [x] Publicação de vagas
