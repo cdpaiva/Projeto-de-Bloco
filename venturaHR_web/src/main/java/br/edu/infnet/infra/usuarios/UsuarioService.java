@@ -22,7 +22,7 @@ public class UsuarioService {
                 .get(Usuario.class);
     }
 
-    public Usuario criarConta(Usuario usuario) {
+    public Usuario criarUsuario(Usuario usuario) {
 
         return client
                 .target(REST_URI)

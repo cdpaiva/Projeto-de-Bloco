@@ -13,6 +13,19 @@ public class CadastroServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        /*
+        String cpf = request.getParameter("cpf");
+        String cnpj = request.getParameter("cnpj");
+        String razaoSocial = request.getParameter("razaoSocial");
+        if(cpf == null || cpf.equals("")) {
+            cpf = "vazio";
+        }
+        if(cnpj==null || cnpj.equals("")) {
+            cnpj = "vazio";
+        }
+        if(razaoSocial==null || razaoSocial.equals("")){
+            razaoSocial = "vazio";
+        }*/
 
         Usuario usuario = new Usuario(
                 request.getParameter("nome"),
@@ -27,7 +40,7 @@ public class CadastroServlet extends HttpServlet {
         );
     
         UsuarioService us = new UsuarioService();
-        Usuario confirmado = us.criarConta(usuario);
+        Usuario confirmado = us.criarUsuario(usuario);
 
         request.setAttribute("nome", confirmado.getNome());
         request.setAttribute("email", confirmado.getEmail());

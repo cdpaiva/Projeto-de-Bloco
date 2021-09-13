@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,12 +23,42 @@
         </nav>
 
         <div class="columns is-centered">
-            <div class="column is-half p-6">
-                <div class="notification is-warning has-text-centered">
+            <div class="column is-three-quarters p-6">
+                <div class="has-text-centered">
 
                     Página inicial de empresas
 
-                    <a href="home.jsp">Retornar à página inicial</a>
+                    <h2>Bem vindo ${usuario.nome}</h2>
+
+                    <c:if test="${not empty vagas}">
+                        <table class="table is-stripped is-fullwidth">
+                            <tr>
+                                <th>Cargo</th><th>Cidade</th><th>Critérios</th>
+                            </tr>
+
+                            <c:forEach var="vaga" items="${vagas}">
+                                <tr>
+                                    <td>${vaga.cargo}</td>
+                                    <td>${vaga.cidade}</td>
+                                    <td>
+                                        <c:forEach var="criterio" items="${vaga.criterios}">
+                                            ${criterio.descricao}<br/>
+                                        </c:forEach>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </table>
+                    </c:if>
+
+                    <div class="column">
+                        <a href="/venturaHR_web/usuarios/empresas/publicarVaga.jsp">Publicar uma nova vaga</a>
+                    </div>
+
+                    <div class="column">
+                        <a href="/venturaHR_web/index.jsp">Sair do sistema</a>
+                    </div>
+
+
                 </div>
             </div>
         </div>

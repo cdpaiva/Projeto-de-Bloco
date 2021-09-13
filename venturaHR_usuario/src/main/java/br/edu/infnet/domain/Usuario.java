@@ -1,22 +1,92 @@
 package br.edu.infnet.domain;
 
-public class Usuario {
+import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
-    String nome;
-    String endereco;
-    String telefone;
-    String email;
-    String senha;
-    String cpf;
-    String razaoSocial;
-    String cnpj;
-    char tipo;
+@Entity
+@Table(name = "usuarios", catalog = "ads_m_2021", schema = "", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"cpf"}),
+    @UniqueConstraint(columnNames = {"email"}),
+    @UniqueConstraint(columnNames = {"cnpj"})})
+@NamedQueries({
+    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
+    @NamedQuery(name = "Usuario.findById", query = "SELECT u FROM Usuario u WHERE u.id = :id"),
+    @NamedQuery(name = "Usuario.findByNome", query = "SELECT u FROM Usuario u WHERE u.nome = :nome"),
+    @NamedQuery(name = "Usuario.findByEndereco", query = "SELECT u FROM Usuario u WHERE u.endereco = :endereco"),
+    @NamedQuery(name = "Usuario.findByTelefone", query = "SELECT u FROM Usuario u WHERE u.telefone = :telefone"),
+    @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email"),
+    @NamedQuery(name = "Usuario.findBySenha", query = "SELECT u FROM Usuario u WHERE u.senha = :senha"),
+    @NamedQuery(name = "Usuario.findByCpf", query = "SELECT u FROM Usuario u WHERE u.cpf = :cpf"),
+    @NamedQuery(name = "Usuario.findByRazaoSocial", query = "SELECT u FROM Usuario u WHERE u.razaoSocial = :razaoSocial"),
+    @NamedQuery(name = "Usuario.findByCnpj", query = "SELECT u FROM Usuario u WHERE u.cnpj = :cnpj"),
+    @NamedQuery(name = "Usuario.findByTipo", query = "SELECT u FROM Usuario u WHERE u.tipo = :tipo")})
+public class Usuario implements Serializable {
 
-    public Usuario(String nome, String telefone, String email) {
-        super();
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(nullable = false)
+    private Integer id;
+    @Basic(optional = false)
+    @Column(nullable = false, length = 50)
+    private String nome;
+    @Basic(optional = false)
+    @Column(nullable = false, length = 100)
+    private String endereco;
+    @Basic(optional = false)
+    @Column(nullable = false, length = 20)
+    private String telefone;
+    @Basic(optional = false)
+    @Column(nullable = false, length = 30)
+    private String email;
+    @Basic(optional = false)
+    @Column(nullable = false, length = 32)
+    private String senha;
+    @Basic(optional = false)
+    @Column(nullable=true, length = 11)
+    private String cpf;
+    @Column(name = "razao_social", length = 50)
+    private String razaoSocial;
+    @Column(length = 14)
+    private String cnpj;
+    @Basic(optional = false)
+    @Column(nullable = false)
+    private Character tipo;
+
+    public Usuario() {
+    }
+
+    public Usuario(Integer id) {
+        this.id = id;
+    }
+
+    public Usuario(Integer id, String nome, String endereco, String telefone, String email, String senha, String cpf, Character tipo) {
+        this.id = id;
         this.nome = nome;
+        this.endereco = endereco;
         this.telefone = telefone;
         this.email = email;
+        this.senha = senha;
+        this.cpf = cpf;
+        this.tipo = tipo;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -83,11 +153,37 @@ public class Usuario {
         this.cnpj = cnpj;
     }
 
-    public char getTipo() {
+    public Character getTipo() {
         return tipo;
     }
 
-    public void setTipo(char tipo) {
+    public void setTipo(Character tipo) {
         this.tipo = tipo;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Usuario)) {
+            return false;
+        }
+        Usuario other = (Usuario) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "br.edu.infnet.domain.Usuario[ id=" + id + " ]";
+    }
+    
 }

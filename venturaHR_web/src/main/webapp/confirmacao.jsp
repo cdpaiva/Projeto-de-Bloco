@@ -13,7 +13,7 @@
     <body>
         <nav class="navbar has-background-info" role="navigation" aria-label="main navigation">
             <div class="navbar-brand has-text-weight-bold">
-                <a class="navbar-item" href="index.jsp">
+                <a class="navbar-item" href="/index.jsp">
                     VENTURA HR
                 </a>
             </div>
@@ -31,7 +31,7 @@
                     </div>
                     Usuario: <%=nome%> cadastrado com sucesso!
                     <br>
-                    <a href="home.jsp">Retornar à página inicial</a>
+                    <a href="/venturaHR_web/index.jsp">Retornar à página inicial</a>
                 </div>
             </div>
         </div>

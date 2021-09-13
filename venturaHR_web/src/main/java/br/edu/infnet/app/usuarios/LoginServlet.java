@@ -9,7 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.edu.infnet.domain.usuarios.Usuario;
+import br.edu.infnet.domain.vagas.Vaga;
 import br.edu.infnet.infra.usuarios.UsuarioService;
+import br.edu.infnet.infra.vagas.VagaService;
+import java.util.List;
+import javax.servlet.http.HttpSession;
 
 public class LoginServlet extends HttpServlet {
 
@@ -22,20 +26,31 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String email = request.getRemoteUser();
+        String email = request.getParameter("email");
         UsuarioService us = new UsuarioService();
         Usuario usuario = us.obterPorEmail(email);
-        request.setAttribute("usuario", usuario);
+        
+        HttpSession sessao = request.getSession();
+        sessao.setAttribute("usuario", usuario);
 
-        String caixaEntrada = "";
-        if (request.isUserInRole("empresa")) {
-            caixaEntrada = "empresas/index.jsp";
-        } else if (request.isUserInRole("candidato")) {
-            caixaEntrada = "candidatos/index.jsp";
-        } else if (request.isUserInRole("administrador")) {
-            caixaEntrada = "administradores/index.jsp";
+        String caixaEntrada;
+        switch (usuario.getTipo()) {
+            case Usuario.EMPRESA:
+                VagaService vs = new VagaService();
+                List<Vaga> vagas = vs.listarPorIdUsuario(usuario.getId());
+                request.setAttribute("vagas", vagas);
+                caixaEntrada = "empresas/index.jsp";
+                break;
+            case Usuario.CANDIDATO:
+                caixaEntrada = "candidatos/index.jsp";
+                break;
+            case Usuario.ADMINISTRADOR:
+                caixaEntrada = "administradores/index.jsp";
+                break;
+            default:
+                caixaEntrada = "home.jsp";
+                break;
         }
-
         RequestDispatcher rd = request.getRequestDispatcher(caixaEntrada);
         rd.forward(request, response);
     }

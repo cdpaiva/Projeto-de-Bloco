@@ -2,18 +2,21 @@ package br.edu.infnet.domain.usuarios;
 
 public class Usuario {
 
-    String nome;
-    String endereco;
-    String telefone;
-    String email;
-    String senha;
-    String cpf;
-    String razaoSocial;
-    String cnpj;
-    char tipo;
+    private int id;
+    private String nome;
+    private String endereco;
+    private String telefone;
+    private String email;
+    private String senha;
+    private String cpf;
+    private String razaoSocial;
+    private String cnpj;
+    private char tipo;
+    public static final char ADMINISTRADOR = 'A';
+    public static final char EMPRESA = 'E';
+    public static final char CANDIDATO = 'C';
 
     public Usuario() {
-
     }
 
     public Usuario(String nome, String endereco, String telefone, String email, String senha, String cpf, String razaoSocial, String cnpj, char tipo) {
@@ -33,6 +36,14 @@ public class Usuario {
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {

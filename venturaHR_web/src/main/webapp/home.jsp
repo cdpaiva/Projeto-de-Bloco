@@ -45,7 +45,7 @@
 
             <div class="column is-one-third">
                 <div class="box">
-                    <form action="j_security_check" method="POST">
+                    <form action="usuarios/login" method="POST">
                         <figure class="image">
                             <img src="venturaLogo.png">
                         </figure>
@@ -53,7 +53,7 @@
                             <label class="label">Email</label>
                             <div class="control has-icons-left">
                                 <input class="input" type="text" placeholder="E-mail"
-                                       name="j_username"> <span class="icon is-small is-left">
+                                       name="email" value="maria@gmail.com"> <span class="icon is-small is-left">
                                     <i class="fa fa-user"></i>
                                 </span>
                             </div>
@@ -64,7 +64,7 @@
                             <label class="label">Senha</label>
                             <div class="control has-icons-left">
                                 <input class="input" type="password" placeholder="Senha"
-                                       name="j_password"> <span class="icon is-small is-left">
+                                       name="senha"> <span class="icon is-small is-left">
                                     <i class="fa fa-lock"></i>
                                 </span>
                             </div>
