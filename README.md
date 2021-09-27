@@ -18,3 +18,13 @@ Implementação dos seguintes casos de uso:
 
 - [x] Pesquisa de vagas
 - [x] Publicação de vagas
+
+## Terceira iteraçãp:
+
+Mudança da utilização do JavaEE clássico para o Spring Boot. Criação de uma nova API para acessar as informações das vagas respondidas pelos candidatos.
+
+Implementação dos seguintes casos de uso:
+
+- [x] Resposta de vagas
+- [x] Acompanhamento de vagas respondidas
+- [x] Apresentação de vagas recentes na página inicial do sistema
