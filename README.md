@@ -12,14 +12,14 @@ Implementação dos casos de uso:
 
 ## Segunda iteração:
 
-Implementação de um banco de dados para persistência das informações inseridas no sistema. Criação de nova API para acessar às informações das empresas cadastradas no sistema.
+Implementação de um banco de dados para persistência das informações inseridas no sistema. Criação de nova API para acessar as informações das empresas cadastradas no sistema.
 
 Implementação dos seguintes casos de uso:
 
 - [x] Pesquisa de vagas
 - [x] Publicação de vagas
 
-## Terceira iteraçãp:
+## Terceira iteração:
 
 Mudança da utilização do JavaEE clássico para o Spring Boot. Criação de uma nova API para acessar as informações das vagas respondidas pelos candidatos.
 
