@@ -23,31 +23,32 @@ public class UsuarioController {
     private UsuarioRepository usuarioRepository;
 
     @GetMapping
-    public @ResponseBody Iterable<Usuario> listarUsuarios(){
-        
+    public @ResponseBody
+    Iterable<Usuario> listarUsuarios() {
+
         return usuarioRepository.findAll();
     }
-    
-    private Usuario findById(int id){
-    
+
+    private Usuario findById(int id) {
+
         Usuario retorno = null;
-        try{
+        try {
             retorno = usuarioRepository.findById(id);
-        } catch (Exception e){
+        } catch (Exception e) {
         }
         return retorno;
     }
-    
-    @GetMapping(path="{id}")
-    public ResponseEntity obterUsuarioPorId(@PathVariable int id){
+
+    @GetMapping(path = "{id}")
+    public ResponseEntity obterUsuarioPorId(@PathVariable int id) {
         ResponseEntity retorno = ResponseEntity.notFound().build();
         Usuario user = this.findById(id);
-        if(user!=null){
+        if (user != null) {
             retorno = ResponseEntity.ok().body(user);
         }
         return retorno;
     }
-    
+
     @GetMapping(path = "/email/{email}")
     public ResponseEntity obterUsuarioPorEmail(@PathVariable String email) {
 
@@ -61,30 +62,36 @@ public class UsuarioController {
 
     @PostMapping
     public ResponseEntity criarUsuario(@RequestBody Usuario user) {
+
+        String msgErro = "Não foi possível cadastrar o usuário";
         
-        //TODO: melhorar estas validações
-        
-        if (user != null && user.getId()!=null) {
-            Usuario novoUser = usuarioRepository.save(user);
-            return new ResponseEntity(novoUser,HttpStatus.CREATED);
+        if (user.getTipo() == 'E' && user.getCnpj().isEmpty()) {
+            msgErro = "O cadastro de uma empresa requer CNPJ";
+        } else if (user.getTipo() == 'C' && user.getCpf().isEmpty()) {
+            msgErro = "O cadastro de um candidato requer CPF";
+        } else {
+            if (user != null && user.getId() != null) {
+                Usuario novoUser = usuarioRepository.save(user);
+                return new ResponseEntity(novoUser, HttpStatus.CREATED);
+            }
         }
-        return new ResponseEntity("Falha ao criar o usuário", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity(msgErro, HttpStatus.BAD_REQUEST);
+
     }
-    
+
     @PutMapping
     public ResponseEntity atualizarUsuario(@RequestBody Usuario user) {
-        
-        if (user != null && user.getId()!=null) {
+
+        if (user != null && user.getId() != null) {
             Usuario usuarioGravado = this.findById(user.getId());
-            
-            if(usuarioGravado!=null){
+
+            if (usuarioGravado != null) {
                 try {
                     usuarioGravado = usuarioRepository.save(user);
-                    return new ResponseEntity(usuarioGravado,HttpStatus.OK);
-                }catch (Exception e){
+                    return new ResponseEntity(usuarioGravado, HttpStatus.OK);
+                } catch (Exception e) {
                 }
             }
-            
         }
         return new ResponseEntity("Falha ao editar o usuário", HttpStatus.BAD_REQUEST);
     }
