@@ -45,4 +45,6 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+HELP.md
+nbactions.xml
 
